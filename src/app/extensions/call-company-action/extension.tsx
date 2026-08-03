@@ -1,10 +1,10 @@
-import type {App} from "attio"
-import {runQuery, showDialog, showToast} from "attio/client"
-import query from "../queries/getCallablePeopleInCompany.graphql"
-import {call} from "./call"
-import {CallDialog, type Person} from "./call-dialog.component"
+import {runQuery, showDialog, showToast, Extensions} from "attio/client"
+import query from "../../../queries/getCallablePeopleInCompany.graphql"
+import {call} from "../../../client/call"
+import {CallDialog, type Person} from "../../../client/call-dialog.component"
 
-export const callCompanyAction: App.Record.Action = {
+export default Extensions.defineExtension({
+    type: "record-action",
     id: "call-company-action",
     onTrigger: async ({recordId}) => {
         const {company} = await runQuery(query, {recordId})
@@ -54,4 +54,4 @@ export const callCompanyAction: App.Record.Action = {
     },
     label: "Call",
     objects: "companies",
-}
+})

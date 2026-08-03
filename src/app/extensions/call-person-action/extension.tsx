@@ -1,9 +1,9 @@
-import type {App} from "attio"
-import {alert, runQuery} from "attio/client"
-import getPersonPhoneNumbersQuery from "../queries/getPersonPhoneNumbers.graphql"
-import {call} from "./call"
+import {alert, runQuery, Extensions} from "attio/client"
+import getPersonPhoneNumbersQuery from "../../../queries/getPersonPhoneNumbers.graphql"
+import {call} from "../../../client/call"
 
-export const callPersonAction: App.Record.Action = {
+export default Extensions.defineExtension({
+    type: "record-action",
     id: "call-person-action",
     onTrigger: async ({recordId}) => {
         const {person} = await runQuery(getPersonPhoneNumbersQuery, {recordId})
@@ -26,4 +26,4 @@ export const callPersonAction: App.Record.Action = {
     },
     label: "Call",
     objects: "people",
-}
+})
