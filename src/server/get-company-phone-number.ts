@@ -34,7 +34,7 @@ export async function getCompanyPhoneNumber() {
         return complete(phoneNumbers.records[0])
     } catch {
         return errored({
-            code: "FAILED_TO_PARSE_RESPONSE",
+            code: "FAILED_TO_PARSE_RESPONSE" as const,
         })
     }
 }
